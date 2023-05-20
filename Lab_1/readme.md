@@ -1,0 +1,100 @@
+# Получение сведений о системе
+
+## Цель работы
+
+Получить сведения об используемой системе
+
+## Исходные данные
+
+1. Ноутбук Asus
+
+2. Ubuntu 22.04.2 LTS
+
+3. Интерпретатор командной оболочки bash 5.2.15
+
+4. Эмулятор терминала Konsole
+
+## План
+
+1. Ввод команд в эмулятор терминала
+
+2. Анализ данных
+
+## Ход работы
+
+1. Для начала получим сведения об используемом дистрибутиве:
+
+```bash
+briskovak@briskovak-VirtualBox:~$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description: Ubuntu 22.04.2 LTS
+Release: 22.04
+Codename: jammy
+```
+
+В результате выполнения данной команды было определён используемый дистрибутив - Ubuntu 22.04.2 LTS.
+
+2.Затем получим сведения о версии ядра:
+
+```bash
+briskovak@briskovak-VirtualBox:~$ uname -a
+Linux briskovak-VirtualBox 5.19.0-35-generic #36~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Feb 17 15:17:25 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+В результате выполнения данной команды была получена версия ядра - 5.19.0-35, дата компиляции ядра - Fri Feb 17 15:17:25.
+
+3.Далее можно получить сведения о процессоре:
+
+```bash
+briskovak@briskovak-VirtualBox:~$ cat /proc/cpuinfo | grep "model name"
+model name: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+model name: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+model name: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz
+```
+
+Было определено, что используемый процессор - трёхпоточный Intel Core i7-10510U с тактовой частотой 1.8 ГГц.
+
+4.Далее получим последние 30 строк логов системы:
+
+```bash
+briskovak@briskovak-VirtualBox:~$ journalctl -q -b| tail -n 30
+мар 02 14:51:48 briskovak-VirtualBox systemd[1]: Finished Cleanup of Temporary Directories.
+мар 02 14:54:23 briskovak-VirtualBox update-notifier[1864]: gtk_widget_get_scale_factor: assertion 'GTK_IS_WIDGET (widget)' failed
+мар 02 14:54:23 briskovak-VirtualBox update-notifier[1864]: gtk_widget_get_scale_factor: assertion 'GTK_IS_WIDGET (widget)' failed
+мар 02 14:55:23 briskovak-VirtualBox dbus-daemon[642]: [system] Activating via systemd: service name='net.reactivated.Fprint' unit='fprintd.service' requested by ':1.46' (uid=1000 pid=1270 comm="/usr/bin/gnome-shell " label="unconfined")
+мар 02 14:55:23 briskovak-VirtualBox systemd[1]: Starting Fingerprint Authentication Daemon...
+мар 02 14:55:23 briskovak-VirtualBox dbus-daemon[642]: [system] Successfully activated service 'net.reactivated.Fprint'
+мар 02 14:55:23 briskovak-VirtualBox systemd[1]: Started Fingerprint Authentication Daemon.
+мар 02 14:55:23 briskovak-VirtualBox gnome-shell[1270]: JS ERROR: Failed to initialize fprintd service: Gio.IOErrorEnum: GDBus.Error:net.reactivated.Fprint.Error.NoSuchDevice: No devices available
+asyncCallback@resource:///org/gnome/gjs/modules/core/overrides/Gio.js:114:23
+мар 02 14:55:27 briskovak-VirtualBox gdm-password][2045]: gkr-pam: unlocked login keyring
+мар 02 14:55:27 briskovak-VirtualBox dbus-daemon[1147]: [session uid=1000 pid=1147] Activating service name='org.freedesktop.FileManager1' requested by ':1.38' (uid=1000 pid=1270 comm="/usr/bin/gnome-shell " label="unconfined")
+мар 02 14:55:27 briskovak-VirtualBox NetworkManager[644]: <info>  [1677758127.5253] agent-manager: agent[ac7e486b60415055,:1.46/org.gnome.Shell.NetworkAgent/1000]: agent registered
+мар 02 14:55:27 briskovak-VirtualBox ubuntu-appindicators@ubuntu.com[1270]: unable to update icon for software-update-available
+мар 02 14:55:27 briskovak-VirtualBox ubuntu-appindicators@ubuntu.com[1270]: unable to update icon for livepatch
+мар 02 14:55:27 briskovak-VirtualBox dbus-daemon[1147]: [session uid=1000 pid=1147] Successfully activated service 'org.freedesktop.FileManager1'
+мар 02 14:55:27 briskovak-VirtualBox dbus-daemon[1147]: [session uid=1000 pid=1147] Activating service name='org.gnome.ArchiveManager1' requested by ':1.111' (uid=1000 pid=2060 comm="gjs /usr/share/gnome-shell/extensions/ding@rasters" label="unconfined")
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 35 with keysym 35 (keycode e).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 31 with keysym 31 (keycode a).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 32 with keysym 32 (keycode b).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 33 with keysym 33 (keycode c).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 34 with keysym 34 (keycode d).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 36 with keysym 36 (keycode f).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 39 with keysym 39 (keycode 12).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 37 with keysym 37 (keycode 10).
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: Window manager warning: Overwriting existing binding of keysym 38 with keysym 38 (keycode 11).
+мар 02 14:55:28 briskovak-VirtualBox dbus-daemon[1147]: [session uid=1000 pid=1147] Successfully activated service 'org.gnome.ArchiveManager1'
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: DING: Detected async api for thumbnails
+мар 02 14:55:28 briskovak-VirtualBox gnome-shell[1270]: DING: GNOME nautilus 42.2
+мар 02 14:55:37 briskovak-VirtualBox nautilus[2053]: Could not delete '.meta.isrunning': Нет такого файла или каталога
+мар 02 14:55:54 briskovak-VirtualBox systemd[1]: fprintd.service: Deactivated successfully.
+```
+
+## Оценка результата
+
+В результате лабораторной работы была получена базовая информация об используемой системе.
+
+## Вывод
+
+Таким образом. мы научились, используя команды Linux, получать сведения о системе.
